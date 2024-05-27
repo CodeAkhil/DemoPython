@@ -1,0 +1,79 @@
+
+<style>
+    .small-input {
+        width: 200px; /* Adjust the width here */
+    }
+</style>
+
+
+
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1" style="font-size:30px;">MOVIE NIGHT&copy; - The Online Movie Store</span>
+    <div class="ml-auto">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+
+         <form class="d-flex" action="{% url 'searchapp:searchresult' %}" method="get" role="search">
+        {% csrf_token %}
+        <input class="form-control  me-2 small-input ms-auto" type="search"  name="q" placeholder="Search" aria-label="search">
+
+        <button class="btn btn-outline-success" type="submit"><i class="fa-brands fa-searchengin"></i></button>
+      </form>
+        </li>
+        <li class="nav-item ml-auto">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown ml-auto {% if 'task_movieapp' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CATEGORY
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'task_movieapp:allprodcat' %}">All Movies</a></li>
+              {% for cat in links %}
+            <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+               {% endfor %}
+          </ul>
+        </li>
+
+
+        <li class="nav-item dropdown ml-auto {% if 'task_movieapp' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Accounts
+          </a>
+          <ul class="dropdown-menu">
+             {% if user.is_authenticated %}
+                <li>Hello {{user.username}}</li>
+                <li><a class="dropdown-item" href="add/">ADD NEW MOVIE</a></li>
+                <li><a class="dropdown-item" href="register/view_profile">Profile</a></li>
+                <li><a class="dropdown-item"  href="register/logout">LOGOUT</a></li>
+
+
+             {% else %}
+                <li><a class="dropdown-item" href="register/register">REGISTER</a></li>
+                <li><a class="dropdown-item" href="register/login">LOGIN</a></li>
+
+            {% endif %}
+
+          </ul>
+        </li>
+
+
+
+<!--        {% if item_count > 0 %}-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="{% url 'cartapp:cart_detail' %}">Your Cart<i class="fa-solid fa-cart-shopping"></i>({{item_count}})</a>-->
+<!--        </li>-->
+<!--        {% endif %}-->
+      </ul>
+
+    </div>
+  </div>
+</nav>
