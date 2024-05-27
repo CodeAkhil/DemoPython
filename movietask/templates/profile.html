@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden; /* Ensure the image doesn't overflow */
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        .profile {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Ensure a circular shape */
+            margin-right: 20px; /* Add some space between image and details */
+        }
+        .profile-details {
+            flex: 1;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 5px 0;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+                align-items: center;
+            }
+            .profile-image {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <h2>User Details:</h2>
+        <br>
+        <div class="profile">
+            <div class="profile-image" style="background-image: url('{{ profile.profile_picture.url }}')"></div>
+            <div class="profile-details">
+                <h1 class="my_prod_title">Username: {{ user.username }}</h1>
+                <h4>First Name: {{ user.first_name }}</h4>
+                <h3>Last Name: {{ user.last_name }}</h3>
+                <h3>Email: {{ user.email }}</h3>
+                <h2>Profile Details:</h2>
+                <ul>
+                    <li>Bio: {{ profile.profession }}</li>
+                    <li>Location: {{ profile.location }}</li>
+                    <li>Birth Date: {{ profile.birth_date }}</li>
+                    <li>Mobile Number: {{ profile.mobile_no }}</li>
+                </ul>
+                <a href="{% url 'userregistration:edit_profile' profile.id %}">
+                    <button>Edit Profile</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
