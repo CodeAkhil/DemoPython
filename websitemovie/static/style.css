@@ -1,0 +1,6 @@
+body {
+    background-color: yellow; /* Fallback background color */
+    background-image: url('main.jpg');
+    background-size: cover;
+    backdrop-filter: blur(100px); /* Apply blur only to the background */
+}
